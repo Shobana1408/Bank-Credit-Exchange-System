@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Raise Dispute | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="form-page">
+    <div class="container">
+        <div class="page-heading">
+            <h2>Raise Dispute</h2>
+            <p>Create a dispute record for borrower, loan, or credit-related issues.</p>
+        </div>
+
+        <div class="form-card large-form-card">
+            <form action="{{ url_for('raise_dispute') }}" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="borrower_id">Borrower ID</label>
+                        <input type="number" id="borrower_id" name="borrower_id" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loan_id">Loan ID</label>
+                        <input type="number" id="loan_id" name="loan_id">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bank_id">Bank ID</label>
+                        <input type="number" id="bank_id" name="bank_id" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dispute_type">Dispute Type</label>
+                        <select id="dispute_type" name="dispute_type" required>
+                            <option value="">Select type</option>
+                            <option value="Wrong Loan Entry">Wrong Loan Entry</option>
+                            <option value="Wrong Payment Status">Wrong Payment Status</option>
+                            <option value="Duplicate Record">Duplicate Record</option>
+                            <option value="Credit Score Issue">Credit Score Issue</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="raised_date">Raised Date</label>
+                        <input type="date" id="raised_date" name="raised_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dispute_status">Dispute Status</label>
+                        <select id="dispute_status" name="dispute_status" required>
+                            <option value="">Select status</option>
+                            <option value="Open">Open</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Resolved">Resolved</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="resolved_date">Resolved Date</label>
+                        <input type="date" id="resolved_date" name="resolved_date">
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="5" placeholder="Describe the issue clearly" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Submit Dispute</button>
+                    <a href="{{ url_for('view_disputes') }}" class="btn btn-outline">View Disputes</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

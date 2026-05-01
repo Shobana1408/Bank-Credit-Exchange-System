@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Dispute Details | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="dashboard-section">
+    <div class="container">
+        <div class="page-heading with-action">
+            <div>
+                <h2>Dispute Details</h2>
+                <p>Detailed view of a selected dispute record.</p>
+            </div>
+            <a href="{{ url_for('view_disputes') }}" class="btn btn-primary">Back to Disputes</a>
+        </div>
+
+        <div class="details-grid">
+            <div class="details-card">
+                <h3>Dispute Information</h3>
+                <div class="detail-row"><span>Dispute ID</span><strong>{{ dispute.dispute_id }}</strong></div>
+                <div class="detail-row"><span>Borrower ID</span><strong>{{ dispute.borrower_id }}</strong></div>
+                <div class="detail-row"><span>Loan ID</span><strong>{{ dispute.loan_id or '-' }}</strong></div>
+                <div class="detail-row"><span>Bank ID</span><strong>{{ dispute.bank_id }}</strong></div>
+                <div class="detail-row"><span>Dispute Type</span><strong>{{ dispute.dispute_type }}</strong></div>
+                <div class="detail-row"><span>Status</span><strong>{{ dispute.dispute_status }}</strong></div>
+                <div class="detail-row"><span>Raised Date</span><strong>{{ dispute.raised_date }}</strong></div>
+                <div class="detail-row"><span>Resolved Date</span><strong>{{ dispute.resolved_date or '-' }}</strong></div>
+            </div>
+
+            <div class="details-card">
+                <h3>Description</h3>
+                <p class="details-description">{{ dispute.description }}</p>
+
+                {% if current_user_role in ["Admin", "Manager"] %}
+                    <h3 style="margin-top: 24px;">Update Dispute Status</h3>
+                    <form action="{{ url_for('update_dispute_status', dispute_id=dispute.dispute_id) }}" method="POST">
+                        <div class="form-group">
+                            <label for="dispute_status">Dispute Status</label>
+                            <select id="dispute_status" name="dispute_status" required>
+                                <option value="">Select status</option>
+                                <option value="Open" {% if dispute.dispute_status == 'Open' %}selected{% endif %}>Open</option>
+                                <option value="In Progress" {% if dispute.dispute_status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                                <option value="Resolved" {% if dispute.dispute_status == 'Resolved' %}selected{% endif %}>Resolved</option>
+                                <option value="Rejected" {% if dispute.dispute_status == 'Rejected' %}selected{% endif %}>Rejected</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="resolved_date">Resolved Date</label>
+                            <input type="date" id="resolved_date" name="resolved_date" value="{{ dispute.resolved_date or '' }}">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Update Status</button>
+                        </div>
+                    </form>
+                {% else %}
+                    <p style="margin-top: 24px;"><strong>Notice:</strong> Only Admin and Manager can update dispute status.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

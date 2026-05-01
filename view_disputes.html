@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}View Disputes | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="dashboard-section">
+    <div class="container">
+        <div class="page-heading with-action">
+            <div>
+                <h2>Dispute Records</h2>
+                <p>View all dispute records from the dispute table.</p>
+            </div>
+            <a href="{{ url_for('raise_dispute') }}" class="btn btn-primary">Raise New Dispute</a>
+        </div>
+
+        <form method="GET" action="{{ url_for('view_disputes') }}" class="search-filter-bar">
+            <input type="text" value="Disputes can be filtered by status" readonly>
+            <select name="status">
+                <option value="">All Status</option>
+                <option value="Open" {% if status == 'Open' %}selected{% endif %}>Open</option>
+                <option value="In Progress" {% if status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                <option value="Resolved" {% if status == 'Resolved' %}selected{% endif %}>Resolved</option>
+                <option value="Rejected" {% if status == 'Rejected' %}selected{% endif %}>Rejected</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dispute ID</th>
+                        <th>Borrower ID</th>
+                        <th>Loan ID</th>
+                        <th>Bank ID</th>
+                        <th>Dispute Type</th>
+                        <th>Raised Date</th>
+                        <th>Status</th>
+                        <th>Resolved Date</th>
+                        <th>Open</th>
+                        {% if current_user_role == "Admin" %}
+                            <th>Delete</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if disputes %}
+                        {% for dispute in disputes %}
+                            <tr>
+                                <td>{{ dispute.dispute_id }}</td>
+                                <td>{{ dispute.borrower_id }}</td>
+                                <td>{{ dispute.loan_id or '-' }}</td>
+                                <td>{{ dispute.bank_id }}</td>
+                                <td>{{ dispute.dispute_type }}</td>
+                                <td>{{ dispute.raised_date }}</td>
+                                <td>{{ dispute.dispute_status }}</td>
+                                <td>{{ dispute.resolved_date or '-' }}</td>
+                                <td>
+                                    <a href="{{ url_for('dispute_details', dispute_id=dispute.dispute_id) }}" class="table-action-link">Open</a>
+                                </td>
+                                {% if current_user_role == "Admin" %}
+                                    <td>
+                                        <form action="{{ url_for('delete_dispute', dispute_id=dispute.dispute_id) }}" method="POST" onsubmit="return confirm('Delete this dispute?');">
+                                            <button type="submit" class="btn btn-outline">Delete</button>
+                                        </form>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="{% if current_user_role == 'Admin' %}10{% else %}9{% endif %}" style="text-align:center;">No dispute records found.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
