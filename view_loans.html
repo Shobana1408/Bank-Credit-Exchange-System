@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Loans | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="dashboard-section">
+    <div class="container">
+        <div class="page-heading with-action">
+            <div>
+                <h2>Loan Records</h2>
+                <p>View all approved loans and track loan status, balance, and tenure.</p>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Loan ID</th>
+                        <th>Application ID</th>
+                        <th>Borrower</th>
+                        <th>Bank</th>
+                        <th>Loan Type</th>
+                        <th>Loan Amount</th>
+                        <th>Interest Rate</th>
+                        <th>Tenure</th>
+                        <th>Sanction Date</th>
+                        <th>Status</th>
+                        <th>Outstanding Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if loans %}
+                        {% for loan in loans %}
+                            <tr>
+                                <td>{{ loan.loan_id }}</td>
+                                <td>{{ loan.application_id }}</td>
+                                <td>{{ loan.borrower_name }}</td>
+                                <td>{{ loan.bank_name }}</td>
+                                <td>{{ loan.loan_type_name }}</td>
+                                <td>₹ {{ loan.loan_amount }}</td>
+                                <td>{{ loan.interest_rate }}</td>
+                                <td>{{ loan.tenure_months }}</td>
+                                <td>{{ loan.sanction_date }}</td>
+                                <td>{{ loan.loan_status }}</td>
+                                <td>₹ {{ loan.outstanding_balance }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="11" style="text-align:center;">No loan records found.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

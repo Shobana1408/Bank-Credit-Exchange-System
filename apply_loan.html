@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Apply Loan | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="form-page">
+    <div class="container">
+        <div class="page-heading">
+            <h2>Loan Application</h2>
+            <p>Create a loan application to improve transparent loan processing and decision making.</p>
+        </div>
+
+        <div class="form-card large-form-card">
+            <form action="{{ url_for('apply_loan') }}" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="borrower_id">Borrower ID</label>
+                        <input type="number" id="borrower_id" name="borrower_id" placeholder="Enter borrower ID" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bank_id">Bank ID</label>
+                        <input type="number" id="bank_id" name="bank_id" placeholder="Enter bank ID" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loan_type_id">Loan Type ID</label>
+                        <input type="number" id="loan_type_id" name="loan_type_id" placeholder="Enter loan type ID" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="applied_amount">Applied Amount</label>
+                        <input type="number" step="0.01" id="applied_amount" name="applied_amount" placeholder="Enter applied amount" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="application_date">Application Date</label>
+                        <input type="date" id="application_date" name="application_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="application_status">Application Status</label>
+                        <select id="application_status" name="application_status" required>
+                            <option value="">Select application status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Under Review">Under Review</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label for="remarks">Remarks</label>
+                        <textarea id="remarks" name="remarks" rows="4" placeholder="Enter loan remarks or comments"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                    <a href="{{ url_for('view_loans') }}" class="btn btn-outline">View Loans</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

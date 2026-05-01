@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Loan Applications | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="dashboard-section">
+    <div class="container">
+        <div class="page-heading with-action">
+            <div>
+                <h2>Loan Applications</h2>
+                <p>View and track all submitted loan applications across banks.</p>
+            </div>
+            <a href="{{ url_for('apply_loan') }}" class="btn btn-primary">Apply Loan</a>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Application ID</th>
+                        <th>Borrower</th>
+                        <th>Bank</th>
+                        <th>Loan Type</th>
+                        <th>Applied Amount</th>
+                        <th>Status</th>
+                        <th>Applied Date</th>
+                        <th>Remarks</th>
+                        {% if current_user_role in ["Admin", "Manager"] %}
+                            <th>Action</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if applications %}
+                        {% for app in applications %}
+                            <tr>
+                                <td>{{ app.application_id }}</td>
+                                <td>{{ app.borrower_name }}</td>
+                                <td>{{ app.bank_name }}</td>
+                                <td>{{ app.loan_type_name }}</td>
+                                <td>₹ {{ app.applied_amount }}</td>
+                                <td>{{ app.application_status }}</td>
+                                <td>{{ app.application_date }}</td>
+                                <td>{{ app.remarks or '-' }}</td>
+
+                                {% if current_user_role in ["Admin", "Manager"] %}
+                                    <td>
+                                        {% if app.application_status != 'Approved' %}
+                                            <a href="{{ url_for('approve_loan', application_id=app.application_id) }}" class="btn btn-outline">Approve</a>
+                                        {% else %}
+                                            Approved
+                                        {% endif %}
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="{% if current_user_role in ['Admin', 'Manager'] %}9{% else %}8{% endif %}" style="text-align:center;">
+                                No loan applications found.
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

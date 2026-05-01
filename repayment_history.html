@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Repayment History | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="dashboard-section">
+    <div class="container">
+        <div class="page-heading with-action">
+            <div>
+                <h2>Repayment History</h2>
+                <p>Track due amounts, paid amounts, payment mode, and repayment status from the repayment table.</p>
+            </div>
+            <a href="{{ url_for('add_repayment') }}" class="btn btn-primary">Add Repayment</a>
+        </div>
+
+        <form method="GET" action="{{ url_for('repayment_history') }}" class="search-filter-bar">
+            <input type="text" name="search" placeholder="Search by Loan ID" value="{{ search }}">
+            <select name="status">
+                <option value="">All Status</option>
+                <option value="Pending" {% if status == 'Pending' %}selected{% endif %}>Pending</option>
+                <option value="Paid" {% if status == 'Paid' %}selected{% endif %}>Paid</option>
+                <option value="Partially Paid" {% if status == 'Partially Paid' %}selected{% endif %}>Partially Paid</option>
+                <option value="Overdue" {% if status == 'Overdue' %}selected{% endif %}>Overdue</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Repayment ID</th>
+                        <th>Loan ID</th>
+                        <th>Installment No</th>
+                        <th>Due Date</th>
+                        <th>Paid Date</th>
+                        <th>Due Amount</th>
+                        <th>Paid Amount</th>
+                        <th>Payment Status</th>
+                        <th>Payment Mode</th>
+                        {% if current_user_role == "Admin" %}
+                            <th>Action</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if repayments %}
+                        {% for repayment in repayments %}
+                            <tr>
+                                <td>{{ repayment.repayment_id }}</td>
+                                <td>{{ repayment.loan_id }}</td>
+                                <td>{{ repayment.installment_no }}</td>
+                                <td>{{ repayment.due_date }}</td>
+                                <td>{{ repayment.paid_date or '-' }}</td>
+                                <td>{{ repayment.due_amount }}</td>
+                                <td>{{ repayment.paid_amount or 0 }}</td>
+                                <td>{{ repayment.payment_status }}</td>
+                                <td>{{ repayment.payment_mode or '-' }}</td>
+                                {% if current_user_role == "Admin" %}
+                                    <td>
+                                        <form action="{{ url_for('delete_repayment', repayment_id=repayment.repayment_id) }}" method="POST" onsubmit="return confirm('Delete this repayment?');">
+                                            <button type="submit" class="btn btn-outline">Delete</button>
+                                        </form>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="{% if current_user_role == 'Admin' %}10{% else %}9{% endif %}" style="text-align:center;">No repayment records found.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

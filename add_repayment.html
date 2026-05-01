@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Add Repayment | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="form-page">
+    <div class="container">
+        <div class="page-heading">
+            <h2>Add Repayment</h2>
+            <p>Insert repayment records into the repayment table and update outstanding balance through trigger.</p>
+        </div>
+
+        <div class="form-card large-form-card">
+            <form action="{{ url_for('add_repayment') }}" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="loan_id">Loan ID</label>
+                        <input type="number" id="loan_id" name="loan_id" placeholder="Enter loan ID" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="installment_no">Installment Number</label>
+                        <input type="number" id="installment_no" name="installment_no" placeholder="Enter installment number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="due_date">Due Date</label>
+                        <input type="date" id="due_date" name="due_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paid_date">Paid Date</label>
+                        <input type="date" id="paid_date" name="paid_date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="due_amount">Due Amount</label>
+                        <input type="number" step="0.01" id="due_amount" name="due_amount" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paid_amount">Paid Amount</label>
+                        <input type="number" step="0.01" id="paid_amount" name="paid_amount" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="payment_status">Payment Status</label>
+                        <select id="payment_status" name="payment_status" required>
+                            <option value="">Select status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Partially Paid">Partially Paid</option>
+                            <option value="Overdue">Overdue</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="payment_mode">Payment Mode</label>
+                        <select id="payment_mode" name="payment_mode">
+                            <option value="">Select mode</option>
+                            <option value="Cash">Cash</option>
+                            <option value="UPI">UPI</option>
+                            <option value="NEFT">NEFT</option>
+                            <option value="IMPS">IMPS</option>
+                            <option value="Cheque">Cheque</option>
+                            <option value="Auto Debit">Auto Debit</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Add Repayment</button>
+                    <a href="{{ url_for('repayment_history') }}" class="btn btn-outline">View Repayments</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
