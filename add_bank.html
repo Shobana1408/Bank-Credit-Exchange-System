@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Add Bank | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="form-section">
+    <div class="container form-container">
+
+        <div class="form-info-card">
+            <h2>Add Bank Details</h2>
+            <p>
+                Add a bank first before registering Admin, Manager, or Officer users.
+                Bank users are linked to an existing bank using Bank ID.
+            </p>
+
+            <ul>
+                <li>Required before user registration</li>
+                <li>Supports multi-bank access</li>
+                <li>Maintains proper foreign key relationship</li>
+            </ul>
+        </div>
+
+        <div class="form-card">
+            <h2>Add Bank</h2>
+
+            <form action="{{ url_for('add_bank') }}" method="POST">
+
+                <div class="form-group">
+                    <label for="bank_name">Bank Name</label>
+                    <input type="text" id="bank_name" name="bank_name" placeholder="Enter bank name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="branch_name">Branch Name</label>
+                    <input type="text" id="branch_name" name="branch_name" placeholder="Enter branch name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ifsc_code">IFSC Code</label>
+                    <input type="text" id="ifsc_code" name="ifsc_code" placeholder="Example: SBIN0001234" maxlength="11" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="bank_email">Bank Email</label>
+                    <input type="email" id="bank_email" name="bank_email" placeholder="Enter bank email">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone_number">Phone Number</label>
+                    <input type="text" id="phone_number" name="phone_number" placeholder="Enter phone number" maxlength="10" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" placeholder="Enter bank address"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="Enter city">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" placeholder="Enter state">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pincode">Pincode</label>
+                    <input type="text" id="pincode" name="pincode" placeholder="Enter pincode" maxlength="6">
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" name="status" required>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Add Bank</button>
+                    <a href="{{ url_for('register') }}" class="btn btn-outline">Go to Register</a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
