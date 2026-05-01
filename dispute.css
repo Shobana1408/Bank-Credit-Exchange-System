@@ -1,0 +1,9 @@
+.dispute-open {
+    color: #d97706;
+    font-weight: 700;
+}
+
+.dispute-resolved {
+    color: #15803d;
+    font-weight: 700;
+}

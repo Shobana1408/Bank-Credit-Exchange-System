@@ -1,0 +1,120 @@
+.table-wrapper {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 24px rgba(12, 42, 88, 0.08);
+    overflow-x: auto;
+}
+
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-wrapper th,
+.table-wrapper td {
+    padding: 12px;
+    border-bottom: 1px solid #e3ebf4;
+    text-align: left;
+}
+
+.table-wrapper th {
+    background: #eef5ff;
+    color: #0b3d91;
+}
+	.page-title {
+    margin-bottom: 20px;
+    color: #1e3a8a;
+}
+
+/* FORM TABLE */
+.form-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.form-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.form-table tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+.form-table label {
+    font-weight: 600;
+    color: #333;
+}
+
+/* INPUTS */
+.form-table input,
+.form-table select {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* BUTTONS */
+.form-buttons {
+    text-align: center;
+    padding-top: 15px;
+}
+
+.btn-primary {
+    background: #1e3a8a;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: #16327a;
+}
+
+.btn-secondary {
+    background: #e5e7eb;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-left: 10px;
+}
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.styled-table thead {
+    background-color: #1f4ea3;
+    color: white;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:nth-child(even) {
+    background-color: #f3f6fb;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #e0eaff;
+}
