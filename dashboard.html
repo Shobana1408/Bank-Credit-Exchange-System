@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="dashboard-section">
+    <div class="container">
+        <div class="dashboard-top">
+            <div>
+                <h2>Dashboard</h2>
+                <p>Monitor centralized credit data, loan transparency, and dispute handling from one place.</p>
+                {% if current_user_role %}
+                    <p style="margin-top:8px;"><strong>Logged in as:</strong> {{ current_user_name }} ({{ current_user_role }})</p>
+                {% endif %}
+            </div>
+            <div class="dashboard-actions">
+                <a href="{{ url_for('add_borrower') }}" class="btn btn-primary">Add Borrower</a>
+                <a href="{{ url_for('apply_loan') }}" class="btn btn-outline">Apply Loan</a>
+                <a href="{{ url_for('raise_dispute') }}" class="btn btn-outline">Raise Dispute</a>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card"><h3>Total Borrowers</h3><p class="stat-value">{{ stats.total_borrowers }}</p></div>
+            <div class="stat-card"><h3>Total Loans</h3><p class="stat-value">{{ stats.total_loans }}</p></div>
+            <div class="stat-card"><h3>Active Loans</h3><p class="stat-value">{{ stats.active_loans }}</p></div>
+            <div class="stat-card"><h3>Pending Repayments</h3><p class="stat-value">{{ stats.pending_repayments }}</p></div>
+            <div class="stat-card"><h3>Credit Inquiries</h3><p class="stat-value">{{ stats.credit_inquiries }}</p></div>
+            <div class="stat-card"><h3>Open Disputes</h3><p class="stat-value">{{ stats.open_disputes }}</p></div>
+            <div class="stat-card"><h3>Consents Granted</h3><p class="stat-value">{{ stats.consents_granted }}</p></div>
+            <div class="stat-card"><h3>Audit Logs</h3><p class="stat-value">{{ stats.audit_logs }}</p></div>
+        </div>
+
+        <div class="quick-links-section">
+            <h3>Quick Access</h3>
+            <div class="quick-links-grid">
+                <a href="{{ url_for('add_borrower') }}" class="quick-link-card">Add Borrower</a>
+                <a href="{{ url_for('view_borrowers') }}" class="quick-link-card">View Borrowers</a>
+                <a href="{{ url_for('apply_loan') }}" class="quick-link-card">Apply Loan</a>
+                <a href="{{ url_for('view_loan_applications') }}" class="quick-link-card">Loan Applications</a>
+                <a href="{{ url_for('view_loans') }}" class="quick-link-card">View Loans</a>
+                <a href="{{ url_for('add_repayment') }}" class="quick-link-card">Add Repayment</a>
+                <a href="{{ url_for('repayment_history') }}" class="quick-link-card">Repayment History</a>
+                <a href="{{ url_for('credit_report') }}" class="quick-link-card">Credit Report</a>
+                <a href="{{ url_for('credit_inquiry') }}" class="quick-link-card">Credit Inquiry</a>
+                <a href="{{ url_for('consent_management') }}" class="quick-link-card">Consent Management</a>
+                <a href="{{ url_for('raise_dispute') }}" class="quick-link-card">Raise Dispute</a>
+                <a href="{{ url_for('view_disputes') }}" class="quick-link-card">View Disputes</a>
+
+                {% if current_user_role == "Admin" %}
+                    <a href="{{ url_for('audit_logs') }}" class="quick-link-card">Audit Logs</a>
+                    <a href="{{ url_for('bank_users') }}" class="quick-link-card">Bank Users</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

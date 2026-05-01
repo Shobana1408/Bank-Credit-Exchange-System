@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Login | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="form-page">
+    <div class="container form-wrapper">
+        <div class="form-side-info">
+            <h2>Welcome Back</h2>
+            <p>
+                Login to access borrower records, loan details, repayment tracking,
+                credit reports, consent information, and dispute handling features.
+            </p>
+
+            <ul class="side-list">
+                <li>Centralized borrower information</li>
+                <li>Transparent loan and repayment tracking</li>
+                <li>Proper dispute resolution workflow</li>
+            </ul>
+        </div>
+
+        <div class="form-card">
+            <h2>Bank User Login</h2>
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" required>
+                </div>
+
+                <div class="form-group password-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="loginPassword" name="password" placeholder="Enter password" required>
+                    <span class="toggle-password" onclick="togglePassword('loginPassword', this)">Show</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" required>
+                        <option value="">Select role</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Officer">Officer</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary full-width">Login</button>
+
+                <p class="form-bottom-text">
+                    New user? <a href="{{ url_for('register') }}">Create an account</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

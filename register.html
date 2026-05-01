@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Register | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="form-page">
+    <div class="container form-wrapper">
+        <div class="form-side-info">
+            <h2>Create Bank User Account</h2>
+            <p>
+                Register a new bank user to access the credit exchange platform and manage
+                borrower, loan, repayment, consent, and dispute data securely.
+            </p>
+
+            <ul class="side-list">
+                <li>Secure user access</li>
+                <li>Multi-bank operational support</li>
+                <li>Accountability through audit tracking</li>
+            </ul>
+        </div>
+
+        <div class="form-card">
+            <h2>Register</h2>
+            <form action="{{ url_for('register') }}" method="POST">
+                <div class="form-group">
+                    <label for="bank_id">Bank ID</label>
+                    <input type="number" id="bank_id" name="bank_id" placeholder="Enter bank ID" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="full_name">Full Name</label>
+                    <input type="text" id="full_name" name="full_name" placeholder="Enter full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="designation">Designation</label>
+                    <input type="text" id="designation" name="designation" placeholder="Enter designation">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone_number">Phone Number</label>
+                    <input type="text" id="phone_number" name="phone_number" placeholder="Enter phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Choose username" required>
+                </div>
+
+                <div class="form-group password-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" name="password" placeholder="Create password" required>
+                    <span class="toggle-password" onclick="togglePassword('registerPassword', this)">Show</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" required>
+                        <option value="">Select role</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Officer">Officer</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary full-width">Register</button>
+
+                <p class="form-bottom-text">
+                    Already have an account? <a href="{{ url_for('login') }}">Login here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

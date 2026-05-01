@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Home | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container hero-grid">
+        <div class="hero-text">
+            <span class="tag">Banking Database Project</span>
+            <h2>Build a Smarter and More Transparent Credit Information Platform</h2>
+            <p>
+                The Bank Credit Exchange System is designed to solve major issues in the banking sector
+                such as scattered borrower data, poor loan tracking, and lack of proper dispute management.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+                <a href="{{ url_for('register') }}" class="btn btn-outline">Register</a>
+            </div>
+        </div>
+
+        <div class="hero-card">
+            <h3>Problems We Solve</h3>
+            <div class="feature-item">
+                <div class="feature-icon">1</div>
+                <div>
+                    <h4>Centralized Credit Data</h4>
+                    <p>Store borrower, loan, and credit details in one system.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">2</div>
+                <div>
+                    <h4>Loan & Repayment Transparency</h4>
+                    <p>Track loan status, dues, balances, and repayment history clearly.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">3</div>
+                <div>
+                    <h4>Structured Dispute Resolution</h4>
+                    <p>Raise disputes, verify records, and track corrections properly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="overview-section">
+    <div class="container">
+        <h2 class="section-title">System Modules</h2>
+
+        <div class="cards-grid">
+            <div class="info-card">
+                <h3>Borrower Management</h3>
+                <p>Add and view borrower details in a centralized way.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Loan Processing</h3>
+                <p>Manage loan applications, sanctioned loans, and balances.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Repayment Tracking</h3>
+                <p>Maintain due dates, paid amounts, and repayment status.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Credit Monitoring</h3>
+                <p>Support credit reports, inquiries, and controlled data access.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Consent Management</h3>
+                <p>Ensure borrower approval before sharing sensitive financial data.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Dispute Handling</h3>
+                <p>Provide a proper workflow to raise and resolve incorrect entries.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
