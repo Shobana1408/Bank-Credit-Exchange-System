@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Audit Logs | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="dashboard-section">
+    <div class="container">
+        <div class="page-heading with-action">
+            <div>
+                <h2>Audit Logs</h2>
+                <p>View all records available in the audit log table.</p>
+            </div>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Log ID</th>
+                        <th>User ID</th>
+                        <th>Action Type</th>
+                        <th>Table Name</th>
+                        <th>Record ID</th>
+                        <th>Action Timestamp</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if logs %}
+                        {% for log in logs %}
+                            <tr>
+                                <td>{{ log.log_id }}</td>
+                                <td>{{ log.user_id }}</td>
+                                <td>{{ log.action_type }}</td>
+                                <td>{{ log.table_name }}</td>
+                                <td>{{ log.record_id }}</td>
+                                <td>{{ log.action_timestamp }}</td>
+                                <td>{{ log.description or '-' }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="7" style="text-align:center;">No audit log records found.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

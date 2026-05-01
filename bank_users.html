@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Bank Users | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="dashboard-section">
+    <div class="container">
+        <div class="page-heading with-action">
+            <div>
+                <h2>Bank Users</h2>
+                <p>View all registered users from the bank_user table.</p>
+            </div>
+            <a href="{{ url_for('register') }}" class="btn btn-primary">Add New User</a>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Bank ID</th>
+                        <th>Full Name</th>
+                        <th>Designation</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if users %}
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.user_id }}</td>
+                                <td>{{ user.bank_id }}</td>
+                                <td>{{ user.full_name }}</td>
+                                <td>{{ user.designation or '-' }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.role }}</td>
+                                <td>{{ user.status }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="8" style="text-align:center;">No bank user records found.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
