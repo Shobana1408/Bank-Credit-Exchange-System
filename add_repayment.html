@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Add Repayment{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <h2 class="page-title">Repayment Entry</h2>
+
+    <form method="POST" class="table-form">
+
+        <table class="form-table">
+            <tr>
+                <td><label>Loan ID</label></td>
+                <td><input type="number" name="loan_id" required></td>
+
+                <td><label>Installment No</label></td>
+                <td><input type="number" name="installment_no" required></td>
+            </tr>
+
+            <tr>
+                <td><label>Due Date</label></td>
+                <td><input type="date" name="due_date" required></td>
+
+                <td><label>Paid Date</label></td>
+                <td><input type="date" name="paid_date"></td>
+            </tr>
+
+            <tr>
+                <td><label>Due Amount</label></td>
+                <td><input type="number" name="due_amount" required></td>
+
+                <td><label>Paid Amount</label></td>
+                <td><input type="number" name="paid_amount"></td>
+            </tr>
+
+            <tr>
+                <td><label>Payment Status</label></td>
+                <td>
+                    <select name="payment_status">
+                        <option value="Pending">Pending</option>
+                        <option value="Paid">Paid</option>
+                    </select>
+                </td>
+
+                <td><label>Payment Mode</label></td>
+                <td>
+                    <select name="payment_mode">
+                        <option value="Cash">Cash</option>
+                        <option value="Online">Online</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4" class="form-buttons">
+                    <button type="submit" class="btn-primary">Submit</button>
+                    <a href="{{ url_for('dashboard') }}" class="btn-secondary">Cancel</a>
+                </td>
+            </tr>
+        </table>
+
+    </form>
+
+</div>
+{% endblock %}
