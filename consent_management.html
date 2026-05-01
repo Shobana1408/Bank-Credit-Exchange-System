@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Consent Management | Bank Credit Exchange System{% endblock %}
+
+{% block content %}
+<section class="form-page">
+    <div class="container">
+        <div class="page-heading">
+            <h2>Consent Management</h2>
+            <p>Create and view borrower consent records from the database.</p>
+        </div>
+
+        <div class="form-card large-form-card">
+            <form action="{{ url_for('consent_management') }}" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="borrower_id">Borrower ID</label>
+                        <input type="number" id="borrower_id" name="borrower_id" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bank_id">Bank ID</label>
+                        <input type="number" id="bank_id" name="bank_id" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="consent_given_date">Consent Given Date</label>
+                        <input type="date" id="consent_given_date" name="consent_given_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="consent_expiry_date">Consent Expiry Date</label>
+                        <input type="date" id="consent_expiry_date" name="consent_expiry_date" required>
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label for="consent_status">Consent Status</label>
+                        <select id="consent_status" name="consent_status" required>
+                            <option value="">Select status</option>
+                            <option value="Granted">Granted</option>
+                            <option value="Revoked">Revoked</option>
+                            <option value="Expired">Expired</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save Consent</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="page-heading" style="margin-top: 35px;">
+            <h2 style="font-size: 28px;">Consent Records</h2>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Consent ID</th>
+                        <th>Borrower ID</th>
+                        <th>Bank ID</th>
+                        <th>Given Date</th>
+                        <th>Expiry Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if consents %}
+                        {% for consent in consents %}
+                            <tr>
+                                <td>{{ consent.consent_id }}</td>
+                                <td>{{ consent.borrower_id }}</td>
+                                <td>{{ consent.bank_id }}</td>
+                                <td>{{ consent.consent_given_date }}</td>
+                                <td>{{ consent.consent_expiry_date }}</td>
+                                <td>{{ consent.consent_status }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6" style="text-align:center;">No consent records found.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
